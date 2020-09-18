@@ -59,6 +59,16 @@ class LoadAd(ABC):
         """
         return self.directory.queries.filter(target=self.model.__module__)
 
+    def run_query(self, query: Query) -> List[ADObject]:
+        base_dn = self.base_dn(query)
+        return self.ad.ldap_query(query.query,
+                                  base_dn,
+                                  single_result=False,
+                                  subtree=True,
+                                  pagination=True,
+                                  attributes=self.fields,
+                                  result_class=ADObject)
+
     @staticmethod
     def is_disabled(entry: ADObject):
         if entry.field('userAccountControl') is None:

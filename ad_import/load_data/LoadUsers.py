@@ -1,8 +1,7 @@
 from pprint import pprint
 
-from ad_import.ad import ADObject
+from ad_import.models import User
 from . import LoadAd
-from ad_import.models import Query, User
 
 
 class LoadUsers(LoadAd):
@@ -41,17 +40,11 @@ class LoadUsers(LoadAd):
               'whenChanged',
               'whenCreated',
               ]
+
     model = User
 
-    def load(self, query: Query):
-        base_dn = self.base_dn(query)
-        entries = self.ad.ldap_query(query.query,
-                                     base_dn,
-                                     single_result=False,
-                                     subtree=True,
-                                     pagination=True,
-                                     attributes=self.fields,
-                                     result_class=ADObject)
+    def load(self, query):
+        entries = self.run_query(query)
 
         for user_data in entries:
             user, exist = self.get_object(user_data)
