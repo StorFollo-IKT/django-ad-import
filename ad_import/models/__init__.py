@@ -1,3 +1,3 @@
-from .Directory import Directory
-from .Query import Query
-from .User import User
+from .directory import Directory
+from .query import Query
+from .user import User

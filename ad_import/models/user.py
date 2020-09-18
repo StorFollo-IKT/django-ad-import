@@ -1,6 +1,6 @@
 from django.db import models
 
-from ad_import.models import Directory
+from . import Directory
 
 
 class User(models.Model):
