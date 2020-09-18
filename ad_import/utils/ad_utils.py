@@ -4,9 +4,11 @@
  * @param int ad_date Microsoft timestamp
  * @return int UNIX timestamp
  """
+from datetime import datetime
 
 
 def microsoft_timestamp_to_unix(ad_date):
+    ad_date = int(ad_date)
     if not ad_date:
         raise ValueError('Invalid date')
 
@@ -21,6 +23,11 @@ def microsoft_timestamp_to_unix(ad_date):
     unixTimeStamp = int(secsAfterADEpoch - AD2Unix)
 
     return unixTimeStamp
+
+
+def parse_date(ad_timestamp) -> datetime:
+    timestamp = microsoft_timestamp_to_unix(ad_timestamp)
+    return datetime.fromtimestamp(timestamp)
 
 
 def find_flags(flag):
