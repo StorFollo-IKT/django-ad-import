@@ -1,10 +1,12 @@
+from abc import ABC
+
 from django.db.models import Model, QuerySet
 
 from ad_import.ad import ADObject, ActiveDirectory
 from ad_import.models import Directory, Query
 
 
-class LoadAd:
+class LoadAd(ABC):
     directory: Directory = None
     model = Model
 
