@@ -1,10 +1,6 @@
-from datetime import datetime
-
 from django.core.management.base import BaseCommand
 
-from ad_import.load_data import LoadWorkstations
-
-
+from ad_import.load_data import LoadServers
 
 
 class Command(BaseCommand):

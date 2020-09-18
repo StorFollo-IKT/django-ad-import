@@ -2,5 +2,5 @@ from . import LoadComputers
 from ..models import Server
 
 
-class LoadWorkstations(LoadComputers):
+class LoadServers(LoadComputers):
     model = Server
