@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from ad_import.ad.ADObject import ADObject
+from ad_import.ad import ADObject
 from . import LoadAd
 from ad_import.models import Query, User
 

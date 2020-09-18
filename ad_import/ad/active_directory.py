@@ -2,7 +2,7 @@ import ldap
 from ldap.controls import SimplePagedResultsControl
 
 from .paginated_lookup import paginated_query
-from .ADObject import ADObject
+from . import ADObject
 
 response_types = {
     0: 'success',
