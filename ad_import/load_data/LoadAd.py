@@ -10,9 +10,8 @@ class LoadAd(ABC):
     directory: Directory = None
     model = Model
 
-    def __init__(self, object_type):
+    def __init__(self):
         self.ad = ActiveDirectory()
-        self.object_type = object_type
 
     def connect(self, directory_name):
         directory = Directory.objects.get(name=directory_name)
@@ -52,7 +51,7 @@ class LoadAd(ABC):
         Get queries from the current directory
         :return: Queries
         """
-        return self.directory.queries.filter(type=self.object_type)
+        return self.directory.queries.filter(target=self.model.__module__)
 
     @staticmethod
     def is_disabled(entry: ADObject):

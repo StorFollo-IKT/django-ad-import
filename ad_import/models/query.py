@@ -2,10 +2,10 @@ from django.db import models
 
 from ad_import.models import Directory
 
-IMPORT_TARGETS = [('ad_import.Workstation', 'Workstation'),
-                  ('costs.Server', 'Server'),
-                  ('ad_import.User', 'User'),
-                  ('ad_import.Group', 'Group')]
+IMPORT_TARGETS = [('ad_import.models.workstation', 'Workstation'),
+                  ('ad_import.models.server', 'Server'),
+                  ('ad_import.models.user', 'User'),
+                  ('ad_import.models.group', 'Group')]
 
 
 class Query(models.Model):

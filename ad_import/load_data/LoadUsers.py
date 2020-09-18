@@ -43,9 +43,6 @@ class LoadUsers(LoadAd):
               ]
     model = User
 
-    def __init__(self):
-        super().__init__('user')
-
     def load(self, query: Query):
         base_dn = self.base_dn(query)
         entries = self.ad.ldap_query(query.query,
