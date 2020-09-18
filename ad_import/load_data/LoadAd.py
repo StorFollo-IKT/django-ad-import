@@ -1,4 +1,5 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+from typing import List
 
 from django.db.models import Model, QuerySet
 
@@ -7,8 +8,9 @@ from ad_import.models import Directory, Query
 
 
 class LoadAd(ABC):
-    directory: Directory = None
-    model = Model
+    directory: Directory
+    model: Model
+    fields = []
 
     def __init__(self):
         self.ad = ActiveDirectory()
@@ -44,6 +46,10 @@ class LoadAd(ABC):
             exist = False
 
         return user, exist
+
+    @abstractmethod
+    def load(self, query: Query):
+        pass
 
     @property
     def queries(self) -> QuerySet[Query]:

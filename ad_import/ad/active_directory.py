@@ -1,3 +1,5 @@
+from typing import Type, Dict, List, Union
+
 import ldap
 from ldap.controls import SimplePagedResultsControl
 
@@ -110,7 +112,9 @@ class ActiveDirectory:
         self.ldap.simple_bind_s(username, password)
 
     def ldap_query(self, query: str, base_dn: str, single_result=True, subtree=True,
-                   attributes: list = None, pagination=False, result_class: ADObject = None):
+                   attributes: list = None, pagination=False,
+                   result_class: Type[ADObject] = None) -> Union[List[Dict], List[ADObject]]:
+
         if not attributes:
             attributes = ['dn']
         if subtree:
