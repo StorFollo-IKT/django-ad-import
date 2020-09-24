@@ -15,8 +15,10 @@ class LoadAd(ABC):
     def __init__(self):
         self.ad = ActiveDirectory()
 
-    def connect(self, directory_name):
-        directory = Directory.objects.get(name=directory_name)
+    def connect(self, directory_name: str = None, directory: Directory = None):
+        if not directory:
+            directory = Directory.objects.get(name=directory_name)
+
         self.directory = directory
         self.ad.connect(dc=directory.dc,
                         username=directory.username,
