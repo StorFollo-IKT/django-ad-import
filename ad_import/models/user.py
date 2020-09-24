@@ -39,7 +39,7 @@ class User(models.Model):
     whenChanged = models.DateTimeField('sist endret', null=True)
     whenCreated = models.DateTimeField('opprettet', null=True)
 
-    directory = models.ForeignKey(Directory, on_delete=models.PROTECT)
+    directory = models.ForeignKey(Directory, on_delete=models.PROTECT, related_name='users')
     last_update = models.DateTimeField('sist oppdatert', auto_now=True)
 
     def __str__(self):
