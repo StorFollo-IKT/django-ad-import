@@ -10,8 +10,9 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 version = os.getenv('TRAVIS_TAG')
 if not version:
-    exit(1)
-version = version[1:]  # Remove v before version number
+    version = '0'
+else:
+    version = version[1:]  # Remove v before version number
 
 setup(
     name='django-ad-import',
