@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
 from typing import List
 
 from django.db.models import Model, QuerySet
 
 from ad_import.ad import ADObject, ActiveDirectory
-from ad_import.models import Directory, Query
+from ad_import.models import Directory, Query, User
 
 
 class LoadAd(ABC):
@@ -77,3 +78,9 @@ class LoadAd(ABC):
             return None
 
         return entry.numeric('userAccountControl') & 2 == 2  # Check if account is disabled
+
+    def get_inactive(self) -> QuerySet:
+        return self.model.objects.filter(
+            last_update__date__lt=datetime.today().date(),
+            directory=self.directory
+        )

@@ -17,3 +17,6 @@ class Command(BaseCommand):
         load.connect(directory)
         for query in load.queries:
             load.load(query)
+
+        inactive = load.get_inactive()
+        inactive.delete()
