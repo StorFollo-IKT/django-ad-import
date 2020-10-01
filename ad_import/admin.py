@@ -18,8 +18,9 @@ class QueryAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['directory', 'displayName', 'givenName', 'sn', 'sAMAccountName']
+    list_display = ['directory', 'displayName', 'givenName', 'sn', 'sAMAccountName', 'lastLogon', 'last_update']
     list_filter = ['directory']
+    readonly_fields = ['last_update']
 
 
 class ComputerAdmin(admin.ModelAdmin):
