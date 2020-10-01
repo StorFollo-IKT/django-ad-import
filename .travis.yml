@@ -15,7 +15,12 @@ install:
 - python setup.py install
 script:
 - python runtests.py
+before_deploy:
+  - git stash --all
+  - echo "$TRAVIS_TAG">ad_import/VERSION
 deploy:
+  cleanup: false
+  edge: true
   provider: pypi
   user: __token__
   on:
