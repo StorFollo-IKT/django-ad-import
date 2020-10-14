@@ -46,4 +46,5 @@ class ADObject:
     def date_string(self, field) -> datetime:
         data = self.string(field)
         # 2020 09 09 08:56:44.0Z
-        return datetime.strptime(data, '%Y%m%d%H%M%S.0Z')
+        if data:
+            return datetime.strptime(data, '%Y%m%d%H%M%S.0Z')
