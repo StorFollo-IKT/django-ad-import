@@ -3,7 +3,7 @@ from typing import Optional
 
 from ad_import.ad import ADObject
 from ad_import.load_data import LoadAd
-from ad_import.models import Computer
+from ad_import.models import Computer, Query
 
 
 class LoadComputers(LoadAd, ABC):
@@ -63,7 +63,7 @@ class LoadComputers(LoadAd, ABC):
 
         return computer
 
-    def load(self, query):
+    def load(self, query: Query):
         entries = self.run_query(query)
 
         for entry in entries:
