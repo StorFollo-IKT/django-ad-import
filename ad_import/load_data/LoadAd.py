@@ -42,7 +42,7 @@ class LoadAd(ABC):
         :return:
         """
         try:
-            user = self.model.objects.get(directory=self.directory, objectSid=entry.bytes('objectSid'))
+            user = self.model.objects.get(directory=self.directory, objectSidString=entry.bytes_int('objectSid'))
             exist = True
         except self.model.DoesNotExist:
             user = self.model(directory=self.directory)

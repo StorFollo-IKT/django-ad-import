@@ -30,9 +30,13 @@ class ADObject:
             print('Error decoding field %s' % field)
             raise e
 
-    def bytes(self, field) -> int:
+    def bytes_int(self, field) -> int:
         if field in self.object:
             return int.from_bytes(self.field(field), 'big')
+
+    def bytes(self, field) -> bytes:
+        if field in self.object:
+            return self.field(field)
 
     def hex(self, field) -> int:
         if field in self.object:
