@@ -1,22 +1,7 @@
-from datetime import datetime
-
-from django.core.management.base import BaseCommand
-
 from ad_import.load_data import LoadUsers
+from ad_import.management.commands import ADBaseCommand
 
-now = datetime.now()
 
-
-class Command(BaseCommand):
-    def add_arguments(self, parser):
-        parser.add_argument('directory', nargs='+', type=str)
-
+class Command(ADBaseCommand):
     def handle(self, *args, **options):
-        directory = options['directory'][0]
-        load = LoadUsers()
-        load.connect(directory)
-        for query in load.queries:
-            load.load(query)
-
-        inactive = load.get_inactive()
-        inactive.delete()
+        self.load(options, LoadUsers)

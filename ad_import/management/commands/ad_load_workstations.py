@@ -1,15 +1,7 @@
-from django.core.management.base import BaseCommand
-
 from ad_import.load_data import LoadWorkstations
+from ad_import.management.commands import ADBaseCommand
 
 
-class Command(BaseCommand):
-    def add_arguments(self, parser):
-        parser.add_argument('directory', nargs='+', type=str)
-
+class Command(ADBaseCommand):
     def handle(self, *args, **options):
-        directory = options['directory'][0]
-        load = LoadWorkstations()
-        load.connect(directory)
-        for query in load.queries:
-            load.load(query)
+        self.load(options, LoadWorkstations)
