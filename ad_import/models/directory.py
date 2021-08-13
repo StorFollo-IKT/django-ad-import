@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from django.db import models
+from django.db.models import Q
 
 
 class Directory(models.Model):
@@ -24,7 +25,8 @@ class Directory(models.Model):
 
     @staticmethod
     def find_directory(name: str) -> Directory:
-        try:
-            return Directory.objects.get(dns_name__iexact=name)
-        except Directory.DoesNotExist:
-            return Directory.objects.get(short_name__iexact=name)
+        return Directory.objects.get(
+            Q(dns_name__iexact=name) |
+            Q(name__iexact=name) |
+            Q(short_name__iexact=name)
+        )
