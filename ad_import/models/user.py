@@ -21,7 +21,8 @@ class User(models.Model):
     lastLogon = models.DateTimeField('siste pålogging', null=True, blank=True)
     logonCount = models.IntegerField('Antall pålogginger', null=True)
     mail = models.EmailField('Epostadresse', null=True)
-    manager = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='Leder', null=True)
+    manager = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='Leder', null=True,
+                                related_name='manages')
     middleName = models.CharField('mellomnavn', max_length=255, blank=True, null=True)
     mobile = models.CharField('mobil', max_length=255, blank=True, null=True)
     name = models.CharField('Navn', max_length=255, blank=True, null=True)
@@ -49,3 +50,8 @@ class User(models.Model):
 
     def disabled(self):
         return self.userAccountControl & 2 == 2
+
+    class Meta:
+        permissions = [
+            ("show_last_logon", "Can show user last logon"),
+        ]
