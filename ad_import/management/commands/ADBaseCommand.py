@@ -2,6 +2,8 @@ from abc import ABC
 from typing import Type
 
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError
+from django.db.models import ProtectedError
 
 from ad_import.load_data import LoadAd
 from ad_import.models import Directory
@@ -37,7 +39,12 @@ class ADBaseCommand(BaseCommand, ABC):
 
         if hasattr(load, 'get_inactive'):
             inactive = load.get_inactive()
-            inactive.delete()
+            try:
+                inactive.delete()
+            except ProtectedError:
+                print('Protected relations')
+            except IntegrityError:
+                print('Integrity error')
 
     def load(self, options: dict, load_class: Type[LoadAd]):
         for directory in self.get_directories(options):
