@@ -33,6 +33,8 @@ class ADBaseCommand(BaseCommand, ABC):
         print('Loading from %s' % directory)
         load = load_class()
         load.connect(directory=directory)
+        if not load.queries:
+            print('No queries found')
         for query in load.queries:
             print('Run query %s' % query)
             load.load(query)
